@@ -3,6 +3,8 @@ import os
 import discord
 from dotenv import load_dotenv
 
+from hello import hello
+
 load_dotenv('.env')
 
 intents = discord.Intents.default()
@@ -22,7 +24,7 @@ async def on_message(message):
         return
 
     if message.content.startswith('$hello'):
-        await message.channel.send('Hello!')
+        await hello.reply_hello(message)
 
 
 client.run(os.getenv('DISCORD_BOT_TOKEN'))
