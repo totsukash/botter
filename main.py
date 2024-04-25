@@ -1,16 +1,28 @@
-# これはサンプルの Python スクリプトです。
+import os
 
-# ⌃R を押して実行するか、ご自身のコードに置き換えてください。
-# ⇧ を2回押す を押すと、クラス/ファイル/ツールウィンドウ/アクション/設定を検索します。
+import discord
+from dotenv import load_dotenv
+
+load_dotenv('.env')
+
+intents = discord.Intents.default()
+intents.message_content = True
+
+client = discord.Client(intents=intents)
 
 
-def print_hi(name):
-    # スクリプトをデバッグするには以下のコード行でブレークポイントを使用してください。
-    print(f'Hi, {name}')  # ⌘F8を押すとブレークポイントを切り替えます。
+@client.event
+async def on_ready():
+    print(f'We have logged in as {client.user}')
 
 
-# ガター内の緑色のボタンを押すとスクリプトを実行します。
-if __name__ == '__main__':
-    print_hi('PyCharm')
+@client.event
+async def on_message(message):
+    if message.author == client.user:
+        return
 
-# PyCharm のヘルプは https://www.jetbrains.com/help/pycharm/ を参照してください
+    if message.content.startswith('$hello'):
+        await message.channel.send('Hello!')
+
+
+client.run(os.getenv('DISCORD_BOT_TOKEN'))
