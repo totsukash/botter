@@ -24,7 +24,7 @@ async def on_message(message):
     if message.author == client.user:
         return
 
-    if message.content.startswith('!hello'):
+    if message.content.startswith(hello.prefix):
         await hello.reply_hello(message)
     elif message.content.startswith(gpt35_chat.prefix):
         await gpt35_chat.reply_chat(message)
