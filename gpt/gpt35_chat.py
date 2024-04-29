@@ -3,7 +3,7 @@ import os
 from openai import OpenAI
 
 prefix = "!gpt"
-conversation_history = {}
+conversation_history = {}  # user_id: [{role: "user", content: "hello"}]
 
 
 def add_conversation_history(user_id: str, role: str, content: str):
