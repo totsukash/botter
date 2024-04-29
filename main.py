@@ -5,6 +5,7 @@ from dotenv import load_dotenv
 
 from hello import hello
 from gpt import gpt35_chat
+from bedrock.knowledgebase import knowledgebase
 
 load_dotenv('.env')
 
@@ -28,6 +29,8 @@ async def on_message(message):
         await hello.reply_hello(message)
     elif message.content.startswith(gpt35_chat.prefix):
         await gpt35_chat.reply_chat(message)
+    elif message.content.startswith(knowledgebase.prefix):
+        await knowledgebase.reply_chat(message)
 
 
 client.run(os.getenv('DISCORD_BOT_TOKEN'))
